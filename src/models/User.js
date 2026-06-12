@@ -53,16 +53,32 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+    // ACCOUNT STATUS
+isFrozen: {
+  type: Boolean,
+  default: false
+},
+
+frozenReason: {
+  type: String,
+  default: ''
+},
+
+frozenAt: {
+  type: Date,
+  default: null
+},
 
     isVerified: {
       type: Boolean,
       default: false
     },
 
-    role: {
-      type: String,
-      default: 'user'
-    },
+role: {
+  type: String,
+  enum: ['user', 'admin'],
+  default: 'user'
+}, 
 
     address: {
       type: String,

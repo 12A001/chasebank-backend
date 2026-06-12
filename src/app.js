@@ -8,6 +8,8 @@ import rateLimit from 'express-rate-limit'
 import authRoutes from './routes/authRoutes.js'
 import transactionRoutes from './routes/transactionRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import freezeRoutes from './routes/freezeRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -34,7 +36,8 @@ app.use(rateLimit({
 app.use('/api/auth', authRoutes)
 app.use('/api/transactions', transactionRoutes)
 app.use('/api/user', userRoutes)
-
+app.use('/api/freeze', freezeRoutes)
+app.use('/api/admin', adminRoutes)
 /* HEALTH CHECK */
 app.get('/', (req, res) => {
   res.json({ message: 'Chase Bank API Running ' })

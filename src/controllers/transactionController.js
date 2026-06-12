@@ -64,6 +64,15 @@ export const sendMoney = async (req, res) => {
     const receiver = await User.findOne({
       accountNumber,
     }).session(session)
+    if (sender.isFrozen) {
+  await session.abortTransaction()
+
+  return res.status(403).json({
+    message:
+      sender.frozenReason ||
+      'Your account has been frozen'
+  })
+}
 
     if (!receiver) {
       await session.abortTransaction()
